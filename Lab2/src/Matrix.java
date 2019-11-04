@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Matrix {
     double[] data;
     int rows;
@@ -140,7 +142,7 @@ public class Matrix {
         Matrix newMatrix = new Matrix(rows, cols);
         for(int i=0; i<rows; i++){
                 for(int j=0; j<cols; j++){
-                    newMatrix.set(i, j, this.get(i,j) + w;
+                    newMatrix.set(i, j, this.get(i,j) + w);
                 }
             }
             return newMatrix;
@@ -150,7 +152,7 @@ public class Matrix {
         Matrix newMatrix = new Matrix(rows, cols);
         for(int i=0; i<rows; i++){
             for(int j=0; j<cols; j++){
-                newMatrix.set(i, j, this.get(i,j) - w;
+                newMatrix.set(i, j, this.get(i,j) - w);
             }
         }
         return newMatrix;
@@ -160,7 +162,7 @@ public class Matrix {
         Matrix newMatrix = new Matrix(rows, cols);
         for(int i=0; i<rows; i++){
             for(int j=0; j<cols; j++){
-                newMatrix.set(i, j, this.get(i,j) * w;
+                newMatrix.set(i, j, this.get(i,j) * w);
             }
         }
         return newMatrix;
@@ -170,7 +172,7 @@ public class Matrix {
         Matrix newMatrix = new Matrix(rows, cols);
         for(int i=0; i<rows; i++){
             for(int j=0; j<cols; j++){
-                newMatrix.set(i, j, this.get(i,j) / w;
+                newMatrix.set(i, j, this.get(i,j) / w);
             }
         }
         return newMatrix;
@@ -187,9 +189,44 @@ public class Matrix {
                     }
                 }
             }
+            return newMatrix;
         }
         else{
             throw new RuntimeException(String.format("%d x %d matrix can't be multiplied by %d x %d", rows, cols, m.rows, m.cols));
         }
     }
+
+    double forbenius(){
+        double result = 0;
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<cols; j++){
+                result += Math.pow(this.get(i, j),2);
+            }
+        }
+        return result;
+    }
+
+    public static Matrix random(int rows, int cols){
+        Matrix m = new Matrix(rows,cols);
+        Random r = new Random();
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<cols; j++){
+                    m.set(i, j, r.nextDouble());
+            }
+        }
+        return m;
+    }
+
+    public static Matrix eye(int n){
+        Matrix m = new Matrix(n,n);
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                if(i==j) m.set(i, j, 1);
+                else m.set(i, j, 0);
+            }
+        }
+        return m;
+    }
+
+    //optional: implement the matrix inversion
 }
