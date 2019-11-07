@@ -193,12 +193,10 @@ public class MatrixTest {
 
     @org.junit.Test
     public void frobenius() {
+        Matrix m = new Matrix(new double [][] {{2,2},{1,1}});
+        assertEquals(10, m.frobenius(), 0.000001);
     }
-
-    @org.junit.Test
-    public void random() {
-    }
-
+    
     @org.junit.Test
     public void eye() {
         Matrix m = Matrix.eye(10);
