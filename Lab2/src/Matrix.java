@@ -196,7 +196,7 @@ public class Matrix {
         }
     }
 
-    double forbenius(){
+    double frobenius(){
         double result = 0;
         for(int i=0; i<rows; i++){
             for(int j=0; j<cols; j++){
@@ -229,4 +229,55 @@ public class Matrix {
     }
 
     //optional: implement the matrix inversion
+    /*
+    void Matrix::swapRows(int i1,int i2)
+{
+ for(int j=0;j<n;j++){
+	double tmp=x[i1][j];
+	x[i1][j]=x[i2][j];
+	x[i2][j]=tmp;
+ }
+}
+void Matrix::invert()
+{
+ int i,j,k;
+ Matrix out(n);
+ for(i=0; i<n; i++){
+	// Find pivot row
+	double max=fabs(x[i][i]);
+	int pivot=i;
+	for(k=i;k<n;k++){
+		if(max<fabs(x[k][i])){
+			max=fabs(x[k][i]);
+			pivot=k;
+		}
+	}
+	if(i!=pivot)swapRows(i,pivot);
+	if(i!=pivot)out.swapRows(i,pivot);
+	if(x[i][i] != 1.0){
+		double divby=x[i][i];
+		if( fabs(divby)>verySmall ){
+			for(j=0;j<n;j++){
+				out.x[i][j]/=divby;
+				x[i][j]/=divby;
+			}
+		}else {
+			throw -1;
+		}
+	}
+	for(j=0;j<n;j++){
+		if(j!=i){
+			if(x[j][i]!=0){
+				double mulby=x[j][i];
+				for(k=0;k<n;k++){
+					x[j][k]-=mulby*x[i][k];
+					out.x[j][k]-=mulby*out.x[i][k];
+				}
+			}
+		}
+	}
+ }
+ *this=out;
+}
+     */
 }
