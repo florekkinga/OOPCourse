@@ -119,7 +119,7 @@ public class Matrix {
             return newMatrix;
         }
         else{
-            throw new RuntimeException(String.format("%d x %d matrix can't be multiplied by to %d x %d", rows, cols, m.rows, m.cols));
+            throw new RuntimeException(String.format("%d x %d matrix can't be multiplied by %d x %d", rows, cols, m.rows, m.cols));
         }
     }
 

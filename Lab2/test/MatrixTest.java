@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 
 public class MatrixTest {
 
+    private double NaN;
+
     @org.junit.Test
     public void correctDimensions() {
         Matrix instance = new Matrix(5,8);
@@ -58,6 +60,30 @@ public class MatrixTest {
         assertEquals(expResultBrackets, resBrackets);
     }
 
+    /*
+    @org.junit.Test
+    String s= "[[1.0,2.3,4.56], [12.3,  45, 21.8]]";
+        s= s.replaceAll("(\\[|\\]|\\s)+","");
+        String[] t = s.split("(,)+");
+        for(String x:t){
+            System.out.println(String.format("\'%s\'",x ));
+        }
+
+        double[]d=new double[t.length];
+        for(int i=0;i<t.length;i++) {
+            d[i] = Double.parseDouble(t[i]);
+        }
+
+        double arr[][]=new double[1][];
+        arr[0]=d;
+
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[i].length;j++){
+                System.out.println(arr[i][j]);
+            }
+        }
+     */
+
     @org.junit.Test(expected = RuntimeException.class)
     public void reshape() {
         Matrix instance = new Matrix(new double [][] {{1, 2, 3, 4}, {5, 6, 7}, {8, 9}, {10}});
@@ -85,22 +111,68 @@ public class MatrixTest {
 
     @org.junit.Test
     public void add() {
+        Matrix m = new Matrix(new double[][] {{1,2,3,4},{5,6},{7,8},{9}});
+        Matrix instance = new Matrix(new double [][] {{1,0,0,0}, {2}, {3}, {4}});
+        Matrix expResult = new Matrix(new double [][] {{2,2,3,4},{7,6},{10,8},{13}});
+        Matrix result = instance.add(m);
+
+        assertArrayEquals(expResult.asArray(), result.asArray());
+
+        Matrix s = new Matrix(new double[][] {{0,2},{3,5}});
+        try {
+            instance.add(s);
+        } catch (RuntimeException exception) {
+            assertEquals("4 x 4 matrix can't be added to 2 x 2", exception.getMessage());
+        }
     }
 
     @org.junit.Test
     public void sub() {
+        Matrix instance = new Matrix(new double[][] {{1,2,3,4},{5,6},{7,8},{9}});
+        Matrix m = new Matrix(new double [][] {{1,0,0,0}, {2}, {3}, {4}});
+        Matrix expResult = new Matrix(new double [][] {{0,2,3,4},{3,6},{4,8},{5}});
+        Matrix result = instance.sub(m);
+
+        assertArrayEquals(expResult.asArray(), result.asArray());
+
+        Matrix s = new Matrix(new double[][] {{0,2},{3,5}});
+        try {
+            instance.sub(s);
+        } catch (RuntimeException exception) {
+            assertEquals("2 x 2 matrix can't be subtracted from 4 x 4", exception.getMessage());
+        }
     }
 
     @org.junit.Test
     public void mul() {
+        Matrix m = new Matrix(new double[][] {{1,2,3,4}, {5,6},{7,8},{9}});
+        Matrix instance = new Matrix(new double [][] {{1,0,0,0}, {2}, {3}, {4}});
+        Matrix expResult = new Matrix(new double [][] {{1,0,0,0},{10},{21},{36}});
+        Matrix result = instance.mul(m);
+
+        assertArrayEquals(expResult.asArray(), result.asArray());
+
+        Matrix s = new Matrix(new double[][] {{0,2},{3,5}});
+        try {
+            instance.mul(s);
+        } catch (RuntimeException exception) {
+            assertEquals("4 x 4 matrix can't be multiplied by 2 x 2", exception.getMessage());
+        }
     }
 
     @org.junit.Test
     public void div() {
+        //....
     }
 
     @org.junit.Test
     public void testAdd() {
+        double w = 10;
+        Matrix instance = new Matrix(new double[][]{{1, 2, 3, 4}, {5, 6}, {7, 8}, {9}});
+        Matrix expResult = new Matrix(new double[][]{{11, 12, 13, 14}, {15, 16, 10, 10},
+                {17, 18, 10, 10}, {19, 10, 10, 10}});
+        Matrix result = instance.add(w);
+        assertArrayEquals(expResult.asArray(), result.asArray());
     }
 
     @org.junit.Test
@@ -129,5 +201,7 @@ public class MatrixTest {
 
     @org.junit.Test
     public void eye() {
+        Matrix m = Matrix.eye(10);
+        assertEquals(m.frobenius(), 10, 0.000001);
     }
 }
