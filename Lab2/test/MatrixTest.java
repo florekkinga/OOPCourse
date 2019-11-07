@@ -76,6 +76,11 @@ public class MatrixTest {
 
     @org.junit.Test
     public void shape() {
+        Matrix instance = new Matrix(new double [][] {{1, 2, 3, 4}, {5, 6, 7}, {8, 9}, {10}});
+        int expResCols = 4;
+        int expResRows = 4;
+        int[] tab = new int []{expResRows, expResCols};
+        assertArrayEquals(tab, instance.shape());
     }
 
     @org.junit.Test
