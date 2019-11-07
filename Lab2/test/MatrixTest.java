@@ -35,20 +35,43 @@ public class MatrixTest {
 
     @org.junit.Test
     public void set() {
-        int r = 3;
-        int c = 3;
-        double value = 0.345;
         Matrix instance = new Matrix(new double [][] {{1, 2, 3, 4}, {5, 6, 7}, {8, 9}, {10}});
-        instance.set(r, c, value);
-        assertEquals(value, instance.get(r,c), 0.000001); // ?????????
+        instance.set(3, 3, 0.345);
+        instance.set(2, 1, 2.80);
+        assertEquals(0.345, instance.get(3,3), 0.000001);
+        assertEquals(2.80, instance.get(2,1), 0.000001);
     }
 
     @org.junit.Test
     public void testToString() {
+        Matrix instance = new Matrix(new double [][] {{1, 2, 3, 4}, {5, 6, 7}, {8, 9}, {10}});
+        int expResultCommas = 12;
+        int expResultBrackets = 8;
+        String result = instance.toString();
+        int resCommas = 0;
+        int resBrackets = 0;
+        for(int i = 0; i < result.length(); i++){
+            if(result.charAt(i) == ',') resCommas++;
+            else if(result.charAt(i) == '[' || result.charAt(i) == ']') resBrackets++;
+        }
+        assertEquals(expResultCommas, resCommas);
+        assertEquals(expResultBrackets, resBrackets);
+    }
+
+    @org.junit.Test(expected = RuntimeException.class)
+    public void reshape() {
+        Matrix instance = new Matrix(new double [][] {{1, 2, 3, 4}, {5, 6, 7}, {8, 9}, {10}});
+        instance.reshape(2,2);
     }
 
     @org.junit.Test
-    public void reshape() {
+    public void reshape2() {
+        Matrix instance = new Matrix(new double[][] {{1, 2, 3, 4}, {5, 6}, {7, 8}, {9}});
+        try {
+            instance.reshape(2, 2);
+        } catch (RuntimeException exception) {
+            assertEquals("4 x 4 matrix can't be reshaped to 2 x 2", exception.getMessage());
+        }
     }
 
     @org.junit.Test
