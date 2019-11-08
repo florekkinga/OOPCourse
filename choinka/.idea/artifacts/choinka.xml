@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="choinka">
+    <output-path>$PROJECT_DIR$/out/artifacts/choinka</output-path>
+    <root id="archive" name="choinka.jar">
+      <element id="module-output" name="choinka" />
+    </root>
+  </artifact>
+</component>
