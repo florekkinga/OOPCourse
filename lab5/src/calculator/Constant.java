@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class Constant extends Node {
     double value;
-    
+
     Constant(double value){
         this.sign = value<0 ? -1 : 1;
         this.value = value<0 ? -value : value;
