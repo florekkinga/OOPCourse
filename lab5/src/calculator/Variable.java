@@ -12,12 +12,10 @@ public class Variable extends Node {
         value = d;
     }
 
-
     @Override
     double evaluate() {
         return sign*value;
     }
-
 
     @Override
     public String toString() {

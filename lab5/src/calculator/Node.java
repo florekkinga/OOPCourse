@@ -20,13 +20,11 @@ abstract public class Node {
     abstract double evaluate();
 
     /**
-     *
      * zwraca tekstową reprezentację wyrażenia
      */
     public String toString(){return "";}
 
     /**
-     *
      * Zwraca liczbę argumentów węzła
      */
     int getArgumentsCount(){return 0;}

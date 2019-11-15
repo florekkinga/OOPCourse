@@ -21,7 +21,8 @@ public class Constant extends Node {
     @Override
     public String toString() {
         String sgn = sign<0 ? "-" : "";
-//        return sgn+Double.toString(value);
+        // return sgn+Double.toString(value);
+        // stosując DecimalFormat pozbędziemy się niepotrzebnych zer na końcu wartości double
         DecimalFormat format = new DecimalFormat("0.#####",new DecimalFormatSymbols(Locale.US));
         return sgn+format.format(value);
     }
