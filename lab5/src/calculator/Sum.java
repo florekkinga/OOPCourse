@@ -46,7 +46,14 @@ public class Sum extends Node {
         StringBuilder b =  new StringBuilder();
         if(sign<0)b.append("-(");
 
-        //zaimplementuj
+        for(int i =0; i<args.size(); i++){
+            Node newarg = args.get(i);
+
+            if(newarg.sign<0) b.append("-(");
+            b.append(newarg.toString());
+            if(newarg.sign<0) b.append(")");
+            if(i<args.size()-1) b.append("+");
+        }
 
         if(sign<0)b.append(")");
         return b.toString();

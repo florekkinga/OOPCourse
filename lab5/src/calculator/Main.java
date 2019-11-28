@@ -5,8 +5,8 @@ import java.util.Locale;
 public class Main {
     public static void main(String[] args) {
         buildAndPrint();
-        buildAndEvaluate();
-        defineCircle();
+        //buildAndEvaluate();
+        //defineCircle();
     }
 
     // TEST 1
